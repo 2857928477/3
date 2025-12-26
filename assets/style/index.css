@@ -1,0 +1,427 @@
+    /* ================= CSS3 样式设计 ================= */
+
+/* 全局CSS变量定义 - 用于统一管理颜色和样式 */
+:root {
+    --jd-red: #f10215;     /* 京东主题红色 */
+    --text-dark: #333;     /* 主要文本颜色 */
+    --text-light: #999;    /* 辅助文本颜色 */
+    --bg-gray: #f4f4f4;    /* 背景灰色 */
+}
+
+/* 全局重置样式 */
+* {
+    box-sizing: border-box; /* 盒模型为border-box，包含内边距和边框 */
+    margin: 0;             /* 清除外边距 */
+    padding: 0;            /* 清除内边距 */
+}
+
+/* 基础页面样式 */
+body {
+    font-family: "Microsoft YaHei", sans-serif; /* 字体设置 */
+    background-color: var(--bg-gray);          /* 背景色使用变量 */
+    color: var(--text-dark);                   /* 文字颜色使用变量 */
+    padding-top: 60px;                         /* 顶部留白，为固定导航栏留出空间 */
+}
+
+/* 链接样式重置 */
+a {
+    text-decoration: none; /* 去除下划线 */
+    color: inherit;       /* 继承父元素颜色 */
+    cursor: pointer;      /* 鼠标指针为手型 */
+}
+
+/* ================= 导航栏样式 ================= */
+header {
+    position: fixed;            /* 固定在顶部 */
+    top: 0;                     /* 顶部对齐 */
+    width: 100%;                /* 宽度占满 */
+    height: 60px;               /* 高度60px */
+    background: #fff;           /* 白色背景 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 底部阴影 */
+    z-index: 1000;              /* 高层叠顺序，确保在最上层 */
+    display: flex;              /* 弹性布局 */
+    align-items: center;        /* 垂直居中 */
+}
+
+/* 内容容器样式 */
+.container {
+    max-width: 1200px;  /* 最大宽度 */
+    margin: 0 auto;     /* 水平居中 */
+    padding: 0 15px;    /* 左右内边距 */
+}
+
+/* 导航栏内容布局 */
+.nav-content {
+    display: flex;              /* 弹性布局 */
+    justify-content: space-between; /* 两端对齐 */
+    align-items: center;        /* 垂直居中 */
+    width: 100%;                /* 宽度占满 */
+}
+
+/* 网站Logo样式 */
+.logo {
+    font-size: 24px;            /* 字体大小 */
+    font-weight: bold;          /* 粗体 */
+    color: var(--jd-red);       /* 使用变量红色 */
+    cursor: pointer;            /* 鼠标指针为手型 */
+}
+
+/* 搜索框样式 */
+.search-box {
+    flex: 1;                    /* 占用剩余空间 */
+    max-width: 500px;           /* 最大宽度 */
+    display: flex;              /* 弹性布局 */
+    margin: 0 20px;             /* 左右外边距 */
+}
+
+/* 搜索输入框样式 */
+.search-box input {
+    flex: 1;                    /* 占用剩余空间 */
+    padding: 8px;               /* 内边距 */
+    border: 2px solid var(--jd-red); /* 红色边框 */
+    outline: none;              /* 去除焦点轮廓 */
+}
+
+/* 搜索按钮样式 */
+.search-box button {
+    background: var(--jd-red);  /* 红色背景 */
+    color: #fff;                /* 白色文字 */
+    border: none;               /* 无边框 */
+    padding: 0 20px;            /* 左右内边距 */
+    cursor: pointer;            /* 鼠标指针为手型 */
+}
+
+/* 用户操作区域样式 */
+.user-actions span {
+    margin-left: 15px;          /* 左边距 */
+    cursor: pointer;            /* 鼠标指针为手型 */
+    font-size: 14px;            /* 字体大小 */
+}
+
+/* 用户操作区域悬停效果 */
+.user-actions span:hover {
+    color: var(--jd-red);       /* 悬停时变为红色 */
+}
+
+/* ================= 页面切换样式 ================= */
+.page {
+    display: none;               /* 默认隐藏所有页面 */
+    padding: 20px 0;             /* 上下内边距 */
+}
+
+/* 活动页面样式 */
+.page.active {
+    display: block;              /* 显示当前活动页面 */
+    animation: fadeIn 0.5s;      /* 淡入动画效果 */
+}
+
+/* 页面切换淡入动画 */
+@keyframes fadeIn {
+    from { opacity: 0; }        /* 起始状态：完全透明 */
+    to { opacity: 1; }          /* 结束状态：完全不透明 */
+}
+
+/* ================= Banner轮播图样式 ================= */
+.banner-container {
+    position: relative;          /* 相对定位，为子元素定位提供参考 */
+    width: 100%;                 /* 宽度占满 */
+    height: 350px;               /* 固定高度 */
+    overflow: hidden;            /* 隐藏溢出内容 */
+    border-radius: 8px;          /* 圆角 */
+    margin-bottom: 20px;         /* 底部外边距 */
+}
+
+/* 轮播图包装器 */
+.banner-wrapper {
+    display: flex;               /* 弹性布局，水平排列 */
+    width: 100%;                 /* 宽度占满 */
+    height: 100%;                /* 高度占满 */
+    transition: transform 0.5s ease-in-out; /* 平滑过渡效果 */
+}
+
+/* 轮播图幻灯片 */
+.banner-slide {
+    min-width: 100%;             /* 最小宽度100% */
+    height: 100%;                /* 高度占满 */
+}
+
+/* 轮播图图片 */
+.banner-slide img {
+    width: 100%;                 /* 宽度占满 */
+    height: 100%;                /* 高度占满 */
+    object-fit: cover;           /* 保持比例填充 */
+}
+
+/* 轮播图指示点容器 */
+.banner-dots {
+    position: absolute;          /* 绝对定位 */
+    bottom: 15px;                /* 距底部15px */
+    left: 50%;                   /* 水平居中 */
+    transform: translateX(-50%); /* 修正居中偏移 */
+    display: flex;              /* 弹性布局 */
+    gap: 10px;                   /* 指示点间距 */
+}
+
+/* 轮播图指示点 */
+.dot {
+    width: 10px;                 /* 宽度 */
+    height: 10px;                /* 高度 */
+    background: rgba(255, 255, 255, 0.5); /* 半透明白色 */
+    border-radius: 50%;          /* 圆形 */
+    cursor: pointer;            /* 鼠标指针为手型 */
+}
+
+/* 活动指示点样式 */
+.dot.active {
+    background: #fff;           /* 白色背景 */
+    transform: scale(1.2);       /* 放大1.2倍 */
+}
+
+/* ================= 品牌筛选区域样式 ================= */
+.brand-section {
+    margin-bottom: 30px;         /* 底部外边距 */
+    background: #fff;            /* 白色背景 */
+    padding: 15px;               /* 内边距 */
+    border-radius: 8px;           /* 圆角 */
+}
+
+/* 品牌网格布局 */
+.brand-grid {
+    display: grid;               /* 网格布局 */
+    grid-template-columns: repeat(6, 1fr); /* 6列等宽 */
+    gap: 15px;                   /* 网格间距 */
+    margin-top: 15px;            /* 顶部外边距 */
+}
+
+/* 平板设备响应式布局 - 3列 */
+@media (max-width: 768px) {
+    .brand-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3列等宽 */
+    }
+}
+
+/* 手机设备响应式布局 - 2列 */
+@media (max-width: 480px) {
+    .brand-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2列等宽 */
+    }
+}
+
+/* 品牌卡片样式 */
+.brand-item {
+    display: flex;               /* 弹性布局 */
+    flex-direction: column;      /* 垂直排列 */
+    align-items: center;        /* 水平居中 */
+    padding: 15px 10px;          /* 内边距 */
+    border: 2px solid #eee;      /* 边框 */
+    border-radius: 8px;          /* 圆角 */
+    cursor: pointer;             /* 鼠标指针为手型 */
+    transition: all 0.3s ease;  /* 平滑过渡效果 */
+}
+
+/* 品牌卡片悬停效果 */
+.brand-item:hover {
+    border-color: var(--jd-red); /* 边框变红 */
+    transform: translateY(-3px); /* 向上移动3px */
+    box-shadow: 0 5px 15px rgba(241, 2, 21, 0.1); /* 红色阴影 */
+}
+
+/* 选中品牌卡片样式 */
+.brand-item.active {
+    border-color: var(--jd-red); /* 边框变红 */
+    background-color: rgba(241, 2, 21, 0.05); /* 浅红色背景 */
+}
+
+/* 品牌图标样式 */
+.brand-icon {
+    font-size: 28px;             /* 图标大小 */
+    margin-bottom: 8px;          /* 底部外边距 */
+}
+
+/* 品牌名称样式 */
+.brand-name {
+    font-size: 14px;             /* 字体大小 */
+    font-weight: bold;           /* 粗体 */
+}
+
+/* 品牌商品数量样式 */
+.brand-count {
+    font-size: 12px;             /* 字体大小 */
+    color: var(--text-light);    /* 使用变量颜色 */
+    margin-top: 4px;             /* 顶部外边距 */
+}
+
+/* ================= 商品列表样式 ================= */
+.goods-grid {
+    display: grid;               /* 网格布局 */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* 自适应列 */
+    gap: 15px;                   /* 网格间距 */
+}
+
+/* 商品卡片样式 */
+.goods-card {
+    background: #fff;             /* 白色背景 */
+    padding: 10px;               /* 内边距 */
+    border-radius: 4px;           /* 圆角 */
+    transition: transform 0.2s;   /* 平滑过渡效果 */
+    cursor: pointer;             /* 鼠标指针为手型 */
+}
+
+/* 商品卡片悬停效果 */
+.goods-card:hover {
+    transform: translateY(-5px); /* 向上移动5px */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+/* 商品图片样式 */
+.goods-img {
+    width: 100%;                 /* 宽度占满 */
+    height: 200px;               /* 固定高度 */
+    object-fit: cover;           /* 保持比例填充 */
+    background: #eee;            /* 背景色 */
+}
+
+/* 商品价格样式 */
+.goods-price {
+    color: var(--jd-red);        /* 红色价格 */
+    font-size: 18px;             /* 字体大小 */
+    font-weight: bold;           /* 粗体 */
+    margin: 10px 0;              /* 上下外边距 */
+}
+
+/* ================= 商品详情页样式 ================= */
+/* 返回按钮样式 */
+.back-btn {
+    display: inline-block;       /* 内联块元素 */
+    margin-bottom: 15px;         /* 底部外边距 */
+    color: #666;                 /* 灰色文字 */
+    font-size: 14px;             /* 字体大小 */
+    padding: 5px 10px;           /* 内边距 */
+    background: #fff;            /* 白色背景 */
+    border-radius: 4px;          /* 圆角 */
+    border: 1px solid #ddd;      /* 边框 */
+}
+
+/* 返回按钮悬停效果 */
+.back-btn:hover {
+    color: var(--jd-red);        /* 悬停时变红 */
+    border-color: var(--jd-red); /* 边框变红 */
+}
+
+/* 详情页容器 */
+.detail-container {
+    display: flex;               /* 弹性布局 */
+    background: #fff;            /* 白色背景 */
+    padding: 20px;               /* 内边距 */
+    gap: 30px;                   /* 间距 */
+    align-items: flex-start;     /* 顶部对齐 */
+}
+
+/* 详情页图片 */
+.detail-img {
+    width: 400px;                /* 宽度 */
+    height: 400px;               /* 高度 */
+    background: #eee;            /* 背景色 */
+    object-fit: cover;           /* 保持比例填充 */
+}
+
+/* 详情页信息区域 */
+.detail-info {
+    flex: 1;                     /* 占用剩余空间 */
+}
+
+/* 详情页大号价格 */
+.price-large {
+    color: var(--jd-red);        /* 红色价格 */
+    font-size: 28px;             /* 字体大小 */
+    font-weight: bold;           /* 粗体 */
+    margin: 15px 0;              /* 上下外边距 */
+}
+
+/* 加入购物车按钮 */
+.btn-add-cart {
+    background: var(--jd-red);   /* 红色背景 */
+    color: #fff;                 /* 白色文字 */
+    border: none;                /* 无边框 */
+    padding: 15px 40px;          /* 内边距 */
+    font-size: 18px;             /* 字体大小 */
+    cursor: pointer;            /* 鼠标指针为手型 */
+}
+
+/* ================= 购物车样式 ================= */
+/* 购物车表格 */
+.cart-table {
+    width: 100%;                 /* 宽度占满 */
+    border-collapse: collapse;   /* 合并边框 */
+    background: #fff;            /* 白色背景 */
+}
+
+/* 购物车表格单元格 */
+.cart-table th,
+.cart-table td {
+    padding: 15px;               /* 内边距 */
+    text-align: left;            /* 左对齐 */
+    border-bottom: 1px solid #eee; /* 底部边框 */
+}
+
+/* 购物车总价栏 */
+.total-bar {
+    text-align: right;           /* 右对齐 */
+    padding: 20px;               /* 内边距 */
+    background: #fff;            /* 白色背景 */
+    margin-top: 20px;            /* 顶部外边距 */
+    font-size: 20px;             /* 字体大小 */
+}
+
+/* 结算按钮 */
+.btn-checkout {
+    background: var(--jd-red);   /* 红色背景 */
+    color: #fff;                 /* 白色文字 */
+    padding: 10px 30px;          /* 内边距 */
+    border: none;                /* 无边框 */
+    margin-left: 20px;           /* 左边距 */
+    font-size: 18px;             /* 字体大小 */
+    cursor: pointer;            /* 鼠标指针为手型 */
+}
+
+/* ================= 表单通用样式 ================= */
+/* 表单容器 */
+.form-box {
+    max-width: 400px;            /* 最大宽度 */
+    margin: 50px auto;           /* 上下外边距50px，水平居中 */
+    background: #fff;            /* 白色背景 */
+    padding: 30px;               /* 内边距 */
+    border-radius: 5px;           /* 圆角 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+/* 表单组 */
+.form-group {
+    margin-bottom: 15px;         /* 底部外边距 */
+}
+
+/* 表单输入框 */
+.form-group input {
+    width: 100%;                 /* 宽度占满 */
+    padding: 10px;               /* 内边距 */
+    border: 1px solid #ddd;      /* 边框 */
+    border-radius: 4px;          /* 圆角 */
+}
+
+/* 提交按钮 */
+.btn-submit {
+    width: 100%;                 /* 宽度占满 */
+    padding: 10px;               /* 内边距 */
+    background: var(--jd-red);   /* 红色背景 */
+    color: #fff;                 /* 白色文字 */
+    border: none;                /* 无边框 */
+    font-size: 16px;             /* 字体大小 */
+    cursor: pointer;            /* 鼠标指针为手型 */
+}
+
+/* 错误提示信息 */
+.error-msg {
+    color: var(--jd-red);        /* 红色文字 */
+    font-size: 12px;             /* 字体大小 */
+    display: none;               /* 默认隐藏 */
+}
