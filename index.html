@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JD-Lite | 基于HTML5的响应式电商平台</title>
+    <link rel="stylesheet" href="assets/style/index.css">
+</head>
+
+<body>
+
+    <!-- 页面头部区域，包含Logo、搜索框和用户操作区 -->
+    <header>
+        <div class="container nav-content">
+            <!-- Logo，点击可返回首页 -->
+            <div class="logo" onclick="app.router('home')">JD-Lite</div>
+            <!-- 搜索框区域 -->
+            <div class="search-box">
+                <!-- 搜索输入框，默认显示学号姓名 -->
+                <input type="text" id="searchInput" placeholder="姚永林 25216950419">
+                <!-- 搜索按钮，点击触发搜索功能 -->
+                <button onclick="app.search()">搜索</button>
+            </div>
+            <!-- 用户操作区域，将动态显示登录状态和用户信息 -->
+            <div class="user-actions" id="userArea">
+            </div>
+        </div>
+    </header>
+
+    <!-- 首页部分，默认显示的页面 -->
+    <section id="home" class="page active">
+        <div class="container">
+            <!-- 轮播图容器，包含轮播图主体和指示点 -->
+            <div class="banner-container" id="bannerBox">
+                <!-- 轮播图主体区域，将动态填充图片内容 -->
+                <div class="banner-wrapper" id="bannerWrapper">
+                </div>
+                <!-- 轮播图指示点区域，用于指示当前图片位置 -->
+                <div class="banner-dots" id="bannerDots">
+                </div>
+            </div>
+
+            <!-- 热门品牌部分 -->
+            <div class="brand-section">
+                <h3>热门品牌</h3>
+                <div class="brand-grid" id="brandList">
+                </div>
+            </div>
+
+            <!-- 商品列表部分 -->
+            <h3 style="margin: 20px 0;">热销推荐</h3>
+            <!-- 商品网格，将动态填充商品内容 -->
+            <div class="goods-grid" id="goodsList">
+            </div>
+        </div>
+    </section>
+
+    <!-- 商品详情页面 -->
+    <section id="detail" class="page">
+        <div class="container">
+            <!-- 返回首页按钮 -->
+            <a onclick="app.router('home')" class="back-btn">&lt; 返回首页</a>
+            <!-- 商品详情内容容器，将动态填充商品详细信息 -->
+            <div class="detail-container" id="detailContent">
+            </div>
+        </div>
+    </section>
+
+    <!-- 购物车页面 -->
+    <section id="cart" class="page">
+        <div class="container">
+            <h2>我的购物车</h2>
+            <!-- 购物车表格，展示已添加的商品 -->
+            <table class="cart-table">
+                <!-- 表头 -->
+                <thead>
+                    <tr>
+                        <th>商品信息</th>
+                        <th>单价</th>
+                        <th>数量</th>
+                        <th>小计</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <!-- 表格主体，将动态填充购物车商品 -->
+                <tbody id="cartBody"></tbody>
+            </table>
+            <!-- 总价栏 -->
+            <div class="total-bar">
+                总价：<span style="color:var(--jd-red)">¥<span id="cartTotal">0.00</span></span>
+                <!-- 结算按钮，点击触发结算功能 -->
+                <button class="btn-checkout" onclick="app.checkout()">去结算</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 登录页面 -->
+    <section id="login" class="page">
+        <div class="form-box">
+            <h2 style="text-align: center; margin-bottom: 20px;">用户登录</h2>
+            <!-- 用户名输入框 -->
+            <div class="form-group">
+                <label>用户名</label>
+                <input type="text" id="loginUser">
+            </div>
+            <!-- 密码输入框 -->
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="loginPass">
+            </div>
+            <!-- 登录按钮，点击触发登录功能 -->
+            <button class="btn-submit" onclick="app.login()">登 录</button>
+            <!-- 注册链接，点击跳转到注册页面 -->
+            <div style="margin-top:15px; text-align:center;">
+                <a onclick="app.router('register')">没有账号？免费注册</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 注册页面 -->
+    <section id="register" class="page">
+        <div class="form-box">
+            <h2 style="text-align: center; margin-bottom: 20px;">新用户注册</h2>
+            <!-- 用户名输入框，附带格式要求提示 -->
+            <div class="form-group">
+                <label>用户名 (字母数字4-16位)</label>
+                <input type="text" id="regUser">
+                <!-- 错误提示信息，默认隐藏 -->
+                <span class="error-msg" id="regUserErr">格式错误</span>
+            </div>
+            <!-- 密码输入框，附带长度要求提示 -->
+            <div class="form-group">
+                <label>密码 (至少6位)</label>
+                <input type="password" id="regPass">
+            </div>
+            <!-- 注册按钮，点击触发注册功能 -->
+            <button class="btn-submit" onclick="app.register()">注 册</button>
+            <!-- 登录链接，点击跳转到登录页面 -->
+            <div style="margin-top:15px; text-align:center;">
+                <a onclick="app.router('login')">已有账号？去登录</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 个人中心页面 -->
+    <section id="profile" class="page">
+        <div class="container">
+            <h2>个人中心</h2>
+            <!-- 用户信息展示区域 -->
+            <div style="background: #fff; padding: 20px; margin-top: 20px;">
+                <!-- 用户名显示区域，将动态填充登录用户的用户名 -->
+                <p>用户名：<span id="profileName"></span></p>
+                <!-- 会员等级显示 -->
+                <p>会员等级：注册会员</p>
+                <!-- 退出登录按钮，点击触发退出功能 -->
+                <button onclick="app.logout()" style="margin-top: 20px; padding: 5px 15px;">退出登录</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 引入JavaScript文件，包含页面交互逻辑 -->
+    <script src="assets/js/index.js">
+
+    </script>
+</body>
+
+</html>
